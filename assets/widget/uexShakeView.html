@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	
+	<script type="text/javascript">
+	
+	window.uexOnload = function(){
+			uexShakeView.onShake = function() {
+				alert("shake");
+			}
+	}
+	
+	function show() {
+		var obj={
+				x:50, 
+				y:150, 
+				w:300, 
+				h:300
+			};
+			uexShakeView.open(JSON.stringify(obj));
+	}
+	
+	function dismiss() {
+		uexShakeView.close();
+	}
+	
+</script>
+</head>
+
+<body>
+	<div class="tit">uexShakeView</div>
+	<div class="conbor">
+		<div class="consj">
+			<input class="btn" type="button" value="打开" onclick=show()>
+			<input class="btn" type="button" value="关闭" onclick=dismiss()>
+		</div>
+	</div>
+</body>
+</html>
