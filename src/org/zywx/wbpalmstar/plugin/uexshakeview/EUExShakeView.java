@@ -1,14 +1,6 @@
 package org.zywx.wbpalmstar.plugin.uexshakeview;
 
-import java.io.Serializable;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.zywx.wbpalmstar.engine.EBrowserView;
-import org.zywx.wbpalmstar.engine.universalex.EUExBase;
-
 import android.app.Activity;
-import android.app.ActivityGroup;
 import android.app.LocalActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +9,13 @@ import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout.LayoutParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.zywx.wbpalmstar.engine.EBrowserView;
+import org.zywx.wbpalmstar.engine.universalex.EUExBase;
+
+import java.io.Serializable;
 
 @SuppressWarnings({ "deprecation", "serial" })
 public class EUExShakeView extends EUExBase implements Serializable {
@@ -27,7 +26,10 @@ public class EUExShakeView extends EUExBase implements Serializable {
 
 	public EUExShakeView(Context context, EBrowserView eBrowserView) {
 		super(context, eBrowserView);
-		mgr = ((ActivityGroup)mContext).getLocalActivityManager();
+        if (mgr == null) {
+            mgr = new LocalActivityManager((Activity) mContext, true);
+            mgr.dispatchCreate(null);
+        }
 		density = mContext.getResources().getDisplayMetrics().density;
 	}
 	
@@ -100,12 +102,12 @@ public class EUExShakeView extends EUExBase implements Serializable {
 			}
 			Window window = mgr.startActivity(activityId, intent);
 			View decorView = window.getDecorView();
-			
+
 			LayoutParams param = new LayoutParams((int)(w * density), (int)(h * density));
 			param.leftMargin = (int) (x * density);
 			param.topMargin = (int) (y * density);
 			addViewToCurrentWindow(decorView, param);
-			
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

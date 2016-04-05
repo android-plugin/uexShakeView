@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<uexplugins>
-	<plugin
-        className="org.zywx.wbpalmstar.plugin.uexshakeview.EUExShakeView" uexName="uexShakeView" >
-        <method name="open" />
-        <method name="close" />
-    </plugin>
-</uexplugins>
