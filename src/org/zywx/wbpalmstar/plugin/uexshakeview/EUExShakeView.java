@@ -103,9 +103,9 @@ public class EUExShakeView extends EUExBase implements Serializable {
 			Window window = mgr.startActivity(activityId, intent);
 			View decorView = window.getDecorView();
 
-			LayoutParams param = new LayoutParams((int)(w * density), (int)(h * density));
-			param.leftMargin = (int) (x * density);
-			param.topMargin = (int) (y * density);
+			LayoutParams param = new LayoutParams(w, h);
+			param.leftMargin = x;
+			param.topMargin = y;
 			addViewToCurrentWindow(decorView, param);
 
 		} catch (JSONException e) {
