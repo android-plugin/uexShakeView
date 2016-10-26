@@ -7,7 +7,10 @@ function(CC) {
            x:0,
            y:window.screen.availHeight / 2,
            w:300,
-           h:300
+           h:300,
+           backgroundImagePath:"res://shakeview_bg.png",
+           upImagePath:"res://shakeview_top.png",
+           downImagePath: "res://shakeview_bottom.png"
        };
        uexShakeView.open(params);
        CC.confirm("检测UI是否正确", function(ret) {
