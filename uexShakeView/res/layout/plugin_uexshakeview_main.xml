@@ -1,15 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#292d2e"
-    tools:context=".EUExShakeView" >
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#292d2e"
+                tools:context=".EUExShakeView" >
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:src="@drawable/shakehideimg_man" />
+        android:src="@drawable/shakehideimg_man"
+        android:scaleType="fitXY"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,63 +20,39 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
         <RelativeLayout
-            android:id="@+id/shakeImgUp"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#292d2e" >
+            android:background="#00000000" >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/shakeImgUp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/ame" />
+                android:src="@drawable/ame"
+                android:scaleType="fitXY"/>
 
-            <ImageView
-                android:id="@+id/shakeImg_up"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true"
-                android:background="@drawable/am_"
-                android:visibility="invisible" />
+
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/shakeImgDown"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#292d2e" >
+            android:background="#00000000" >
 
             <ImageView
+                android:id="@+id/shakeImgDown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/amb" />
-
-            <ImageView
-                android:id="@+id/shakeImg_down"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerInParent="true"
-                android:background="@drawable/ama"
-                android:visibility="invisible" />
+                android:src="@drawable/amb"
+                android:scaleType="fitXY"/>
         </RelativeLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
     </LinearLayout>
 
 </RelativeLayout>

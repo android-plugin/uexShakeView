@@ -12,6 +12,7 @@ import android.widget.RelativeLayout.LayoutParams;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.zywx.wbpalmstar.base.BUtility;
 import org.zywx.wbpalmstar.engine.EBrowserView;
 import org.zywx.wbpalmstar.engine.universalex.EUExBase;
 
@@ -19,7 +20,7 @@ import java.io.Serializable;
 
 @SuppressWarnings({ "deprecation", "serial" })
 public class EUExShakeView extends EUExBase implements Serializable {
-	
+
 	static final String onShake = "uexShakeView.onShake";
 	private float density;
 	private LocalActivityManager mgr;
@@ -32,11 +33,11 @@ public class EUExShakeView extends EUExBase implements Serializable {
         }
 		density = mContext.getResources().getDisplayMetrics().density;
 	}
-	
+
 	public void open(String[] params) {
 		sendMessageWithType(EUExShakeUtils.SHAKEVIEW_MSG_CODE_OPEN, params);
 	}
-	
+
 	public void close(String[] params) {
 		sendMessageWithType(EUExShakeUtils.SHAKEVIEW_MSG_CODE_CLOSE, params);
 	}
@@ -53,7 +54,7 @@ public class EUExShakeView extends EUExBase implements Serializable {
 		msg.setData(bundle);
 		mHandler.sendMessage(msg);
 	}
-	
+
 	@Override
 	public void onHandleMessage(Message msg) {
 		if(msg.what == EUExShakeUtils.SHAKEVIEW_MSG_CODE_OPEN) {
@@ -93,7 +94,26 @@ public class EUExShakeView extends EUExBase implements Serializable {
 			final int y = Integer.parseInt(object.getString(EUExShakeUtils.SHAKEVIEW_PARAMS_JSON_KEY_Y));
 			final int w = Integer.parseInt(object.getString(EUExShakeUtils.SHAKEVIEW_PARAMS_JSON_KEY_W));
 			final int h = Integer.parseInt(object.getString(EUExShakeUtils.SHAKEVIEW_PARAMS_JSON_KEY_H));
-			Intent intent = new Intent(mContext, EShakeViewBaseActivity.class);
+            String backgroundImagePath = object.optString(EUExShakeUtils.SHAKEVIEW_PARAMS_JSON_KEY_BACKGROUD_IMAGE_PATH);
+            String upImagePath = object.optString(EUExShakeUtils.SHAKEVIEW_PARAMS_JSON_KEY_UP_IMAGE_PATH);
+            String downImagePath = object.optString(EUExShakeUtils.SHAKEVIEW_PARAMS_JSON_KEY_DOWN_IMAGE_PATH);
+            backgroundImagePath = BUtility.makeRealPath(
+                    BUtility.makeUrl(mBrwView.getCurrentUrl(), backgroundImagePath),
+                    mBrwView.getCurrentWidget().m_widgetPath,
+                    mBrwView.getCurrentWidget().m_wgtType);
+            upImagePath = BUtility.makeRealPath(
+                    BUtility.makeUrl(mBrwView.getCurrentUrl(), upImagePath),
+                    mBrwView.getCurrentWidget().m_widgetPath,
+                    mBrwView.getCurrentWidget().m_wgtType);
+            downImagePath = BUtility.makeRealPath(
+                    BUtility.makeUrl(mBrwView.getCurrentUrl(), downImagePath),
+                    mBrwView.getCurrentWidget().m_widgetPath,
+                    mBrwView.getCurrentWidget().m_wgtType);
+
+            Intent intent = new Intent(mContext, EShakeViewBaseActivity.class);
+            intent.putExtra(EUExShakeUtils.SHAKEVIEW_PARAMS_JSON_KEY_BACKGROUD_IMAGE_PATH, backgroundImagePath);
+            intent.putExtra(EUExShakeUtils.SHAKEVIEW_PARAMS_JSON_KEY_UP_IMAGE_PATH, upImagePath);
+            intent.putExtra(EUExShakeUtils.SHAKEVIEW_PARAMS_JSON_KEY_DOWN_IMAGE_PATH, downImagePath);
 			intent.putExtra(EUExShakeUtils.SHAKEVIEW_KEY_CODE_OBJ, this);
 			String activityId = EUExShakeView.this.hashCode() + EUExShakeUtils.SHAKEVIEW_KEY_CODE_ACTIVITYID;
 			EShakeViewBaseActivity activity = (EShakeViewBaseActivity) mgr.getActivity(activityId);
@@ -112,15 +132,15 @@ public class EUExShakeView extends EUExBase implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void callBack(String str) {
 		onCallback(str);
 	}
-	
+
 	@Override
 	protected boolean clean() {
 		close(null);
 		return true;
 	}
-	
+
 }
