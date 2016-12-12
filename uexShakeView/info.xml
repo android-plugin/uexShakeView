@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexShakeView" version="3.0.2" build="2">
-        <info>2:新增参数，支持界面自定义</info>
+        uexName="uexShakeView" version="4.0.0" build="2">
+        <info>2:4.0插件</info>
         <build>1:移除ActivityGroup, 解决插件调用失败的问题</build>
 		<build>0:摇一摇</build>
     </plugin>
